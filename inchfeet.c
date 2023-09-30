@@ -1,4 +1,3 @@
-//using structure add 2 distance in inch feet system
 #include <stdio.h>
 
 struct Distance {
