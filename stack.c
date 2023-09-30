@@ -1,46 +1,58 @@
 #include<stdio.h>
-int main()
-{
-int a[20],top=-1,ch,el;
-printf("\n Select your choices");
-do
-{
-printf("\n1. Insertion \n2.Deletion \n3. exit \n4.Display\n");
-scanf("%d",&ch);
-if(ch==1)
-{
-if(top!=20)
-{
-printf("\nEnter the element");
-scanf("%d",&el);
-top++;
-a[top]=el;
-}
-else
-printf("\nStack overflow");
+int arr[10], top=-1, n;
+
+void push(){
+	if(top >= n){
+		printf("Stack is overflow.");
+	}else {
+		int data;
+		printf("Enter the data : ");
+		scanf("%d", &data);
+		top += 1;
+		arr[top] = data;
+	}
 }
 
-
-else if(ch==2)
-{
-if(top!=-1)
-{
-printf("\nRemoving the last element");
-top--;
-}
-else
-printf("\n Stack underflow");
+void pop(){
+	if(top < 0){
+		printf("Stack is underflow.");
+	}else {
+		top -= 1;
+	}
 }
 
-
-
-else if(ch==4)
-{
-printf("\nDisplayin elements");
-for(int i=0;i<=top;i++)
-printf("\t%d",a[i]);
+void display(){
+	if(top < 0){
+		printf("Stack is underflow.");
+	}else {
+		for(int i = top; i >= 0; i--){
+			printf("%d ", arr[i]);
+		}
+	}
 }
-}while(ch!=3);
-printf("\nExited");
-return 0;
+
+int main(){
+	int choice=0;
+	printf("Enter the array limit : ");
+	scanf("%d", &n);
+	while(choice != 4){
+		printf("Enter the choice 1 - push, 2 - pop, 3 - display, 4 - exit");
+		scanf("%d", &choice);
+		switch(choice){
+			case 1: 
+				push();
+				break;
+			case 2:
+				pop();
+				break;
+			case 3: 
+				display();
+				break;
+			case 4:
+				printf("Exiting..");
+				break;
+			default:
+				printf("Invalid entry!");
+		}
+	}
 }
