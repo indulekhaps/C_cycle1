@@ -1,55 +1,68 @@
- #include<stdio.h>
-void main()
-{
-int a[25],beg,item,last,n,num,i,ch,mid,f=0;
-printf("menu\n");
-printf("\n 1.linear search");
-printf("\n 2.binary search");
-printf("\n enter the choice");
-scanf("%d",&ch);
-if(ch==1)
-{
-printf("\n enter the number of elements in the array");
-scanf("%d",&n);
-printf("\n enter the sorted array");
-for(i=0;i<n;i++)
-scanf("%d",&a[i]);
-printf("\n enter the item to be searched");
-scanf("%d",&item);
-for(i=0;i<n;i++)
-{
-if(a[i]==item)
-{
-printf("\n item found at position%d",i+1);
-break;
+#include<stdio.h>
+
+int linearSearch(int arr[], int n, int key){
+	for(int i = 0; i<n; i++){
+		if(arr[i] == key){
+			return i;
+		}
+	}
+	return -1;
 }
+
+int binarySearch(int array[], int key, int low, int high){
+    while (low <= high){
+        int mid = low + (high - low) / 2;
+
+        if (array[mid] == key)
+            return mid;
+            
+        if (array[mid] < key)
+            low = mid + 1;
+        else
+            high = mid - 1;
+    }
+
+    return -1;
 }
-if(i==n)
-printf("\n item not found");
+
+int main(){
+	int n=5, key, choice=0, isKey;
+	int arr[n];
+	printf("Enter the array elements : ");
+	for(int i = 0; i<n; i++){
+		scanf("%d", &arr[i]);
+	}
+
+	
+	while(choice != 3){
+		printf("\nEnter the choice 1 - Linear search 2 - Binary search 3 - Exit : ");
+		scanf("%d", &choice);
+		switch(choice){
+			case 1:
+				printf("Enter the key : ");
+				scanf("%d", &key);
+				isKey = linearSearch(arr, n, key);
+				if(isKey == -1){
+					printf("Not found!");
+				}else{
+					printf("Key found at %d", isKey+1);
+				}
+				break;
+			case 2:
+				printf("Enter the key : ");
+				scanf("%d", &key);
+				isKey = binarySearch(arr, key, 0, n-1);
+				if(isKey == -1){
+					printf("Not found!");
+				}else{
+					printf("Key found at %d", isKey+1);
+				}
+				break;
+			case 3:
+				printf("Exiting..");
+				break;
+		}
+	}
 }
-if(ch==2)
-{
-printf("\nenter the number of elements in the array");
-scanf("%d",&n);
-printf("enter the sorted array");
-for(i=0;i<n;i++)
-scanf("%d",&a[i]);
-printf("item to be searched");
-scanf("%d",&item);
-last=n-1;
-mid=(beg+last)/2;
-while(beg<=last)
-{
-if(item==a[mid])
-{
-printf("\n item found at position %d",mid+1);
-break;
-}
-else if(a[mid]>item)
-last=mid-1;
-else beg=mid+1;
-mid=(beg+last)/2;
-}
-}
-}
+
 
